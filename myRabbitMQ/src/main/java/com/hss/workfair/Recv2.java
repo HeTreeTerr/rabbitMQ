@@ -16,7 +16,7 @@ public class Recv2 {
         //从连接中获取一个通道
         final Channel channel = connection.createChannel();
         //声明队列
-        channel.queueDeclare(QUEUE_NAME,false,false,false,null);
+        channel.queueDeclare(QUEUE_NAME,true,false,false,null);
         //保证一次分发一个
         channel.basicQos(1);
         //定义一个消费者

@@ -3,6 +3,7 @@ package com.hss.workfair;
 import com.hss.util.ConnectionUtils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.MessageProperties;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -35,7 +36,8 @@ public class Send1 {
 
         for(int i = 0; i<50; i++){
             String msg = "hello"+i;
-            channel.basicPublish("",QUEUE_NAME,null,msg.getBytes());
+            /* MessageProperties.PERSISTENT_TEXT_PLAIN 消息持久化 */
+            channel.basicPublish("",QUEUE_NAME,MessageProperties.PERSISTENT_TEXT_PLAIN,msg.getBytes());
             Thread.sleep(i*20);
             System.out.println("--send msg:"+msg);
         }
