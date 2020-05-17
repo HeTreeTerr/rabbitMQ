@@ -26,7 +26,15 @@ public class AmqpServiceConsumer {
 */
     @RabbitListener(queues = {"com.queue.notify.hello"})
     public void receiveSmsCodeQueue(Message message, Channel channel) throws IOException {
-        System.out.println("------hello：消费者处理消息------");
+        System.out.println("------hello：消费者处理消息[0]------");
+        System.out.println("messge="+message);
+        // 采用手动应答模式, 手动确认应答更为安全稳定
+        channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
+    }
+
+    @RabbitListener(queues = {"com.queue.notify.hello"})
+    public void receiveSmsCodeQueue1(Message message, Channel channel) throws IOException {
+        System.out.println("------hello：消费者处理消息[1]------");
         System.out.println("messge="+message);
         // 采用手动应答模式, 手动确认应答更为安全稳定
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);

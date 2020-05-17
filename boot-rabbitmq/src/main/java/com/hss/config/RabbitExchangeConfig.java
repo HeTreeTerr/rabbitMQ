@@ -1,10 +1,7 @@
 package com.hss.config;
 
 
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -49,6 +46,7 @@ public class RabbitExchangeConfig {
     @Bean
     Queue queueHello() {
         /**
+         * 创建队列
          * param1 队列名称
          * param2 队列持久化
          * param3 独占队列
@@ -56,6 +54,11 @@ public class RabbitExchangeConfig {
          */
         Queue queue = new Queue("com.queue.notify.hello", true,false,false);
         this.rabbitAdmin.declareQueue(queue);
+        //添加绑定关系
+        this.rabbitAdmin.declareBinding(new Binding("com.queue.notify.hello",Binding.DestinationType.QUEUE,"com.exchange.topic","topic",null));
+        //解除绑定关系
+        this.rabbitAdmin.removeBinding(new Binding("com.queue.notify.hello",Binding.DestinationType.QUEUE,"com.exchange.topic","topic",null));
+
         return queue;
     }
 
