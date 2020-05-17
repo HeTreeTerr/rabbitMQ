@@ -24,7 +24,7 @@ public class Send {
         /**
          * fanout 无论routingKey是否一致或是为空，都会发送给所有队列
          * direct 处理路由键，只发送给绑定时routingkey一致的队列
-         * topic
+         * topic（支持匹配符，其余和路由模式相同）
          */
         channel.exchangeDeclare(EXCHANGE_NAME,"topic",true,false,null);//分发
 
