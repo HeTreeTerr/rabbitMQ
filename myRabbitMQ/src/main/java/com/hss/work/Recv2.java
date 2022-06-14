@@ -17,6 +17,8 @@ public class Recv2 {
         Channel channel = connection.createChannel();
         //声明队列
         channel.queueDeclare(QUEUE_NAME,false,false,false,null);
+        //MQ 不再对消费者一次发送多个请求，而是消费者处理完一个消息后（确认后），再从队列中获取一个新的
+        channel.basicQos(1);
         //定义一个消费者
         DefaultConsumer consumer = new DefaultConsumer(channel){
             //获取到达的消息
