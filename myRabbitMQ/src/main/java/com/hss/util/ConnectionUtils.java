@@ -17,15 +17,15 @@ public class ConnectionUtils {
         ConnectionFactory factory = new ConnectionFactory();
 
         //设置服务地址
-        factory.setHost("192.168.2.104");
+        factory.setHost("192.168.2.107");
         //AMQP 5672
         factory.setPort(5672);
         //vhost
-        factory.setVirtualHost("/vhost_hss");
+        factory.setVirtualHost("/first-virtual");
         //用户名
-        factory.setUsername("hss");
+        factory.setUsername("admin");
         //密码
-        factory.setPassword("root");
+        factory.setPassword("123456");
 
         return factory.newConnection();
     }

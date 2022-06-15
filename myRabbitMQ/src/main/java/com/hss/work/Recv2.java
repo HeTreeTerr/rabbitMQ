@@ -6,6 +6,9 @@ import com.rabbitmq.client.*;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * 消息消费者2
+ */
 public class Recv2 {
 
     private static final String QUEUE_NAME="test_work_queue";
@@ -34,10 +37,12 @@ public class Recv2 {
                 }finally {
                     System.out.println("[2] done");
                 }
+                //false只确认签收当前的消息，设置为true的时候则代表签收该消费者所有未签收的消息
+                channel.basicAck(envelope.getDeliveryTag(), false);
             }
         };
         //监听队列
-        channel.basicConsume(QUEUE_NAME,true,consumer);
+        channel.basicConsume(QUEUE_NAME,false,consumer);
     }
 
 }

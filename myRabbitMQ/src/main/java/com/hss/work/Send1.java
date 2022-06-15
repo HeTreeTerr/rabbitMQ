@@ -9,6 +9,7 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * 一对多queue一对多测试
+ * 消息生产者
  */
 public class Send1 {
 
