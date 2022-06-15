@@ -36,9 +36,9 @@ public class Recv1 {
                     e.printStackTrace();
                 }finally {
                     System.out.println("[1] done");
+                    //false只确认签收当前的消息，设置为true的时候则代表签收该消费者所有未签收的消息
+                    channel.basicAck(envelope.getDeliveryTag(), false);
                 }
-                //false只确认签收当前的消息，设置为true的时候则代表签收该消费者所有未签收的消息
-                channel.basicAck(envelope.getDeliveryTag(), false);
             }
         };
         //监听队列

@@ -17,7 +17,7 @@ public class Recv1 {
         Connection connection = ConnectionUtils.getConnection();
         //声明通道
         final Channel channel = connection.createChannel();
-        //声明队列 queueDeclare（名字，是否知持久化道，独占的queue， 不使用时是否自内动删除，其他参数）；
+        //声明队列 queueDeclare（名字，是否持久化，独占的queue， 不使用时是否自内动删除，其他参数）；
         channel.queueDeclare(QUEUE_NAME,true,false,false,null);
         //绑定队列到交换机（转发器）
         channel.queueBind(QUEUE_NAME,EXCHANGE_NAME,"");
