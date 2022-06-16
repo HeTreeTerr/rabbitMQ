@@ -10,6 +10,7 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * confirm
+ * 保证消息被 broker 接收
  * 普通 发一条 waitForConfirms()
  */
 public class ConfirmSend1 {
