@@ -6,6 +6,9 @@ import com.rabbitmq.client.*;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * 消息消费者2
+ */
 public class Recv2 {
 
     private static final String QUEUE_NAME = "test_queue_fanout_sms";
@@ -20,8 +23,8 @@ public class Recv2 {
         //声明队列
         channel.queueDeclare(QUEUE_NAME,true,false,false,null);
         //绑定队列到交换机（转发器）
-        String routingkey = "email";
-        channel.queueBind(QUEUE_NAME,EXCHANGE_NAME,routingkey);
+        channel.queueBind(QUEUE_NAME,EXCHANGE_NAME,"sms");
+        channel.queueBind(QUEUE_NAME,EXCHANGE_NAME,"weChat");
 
         //保证一次分发一个
         channel.basicQos(1);

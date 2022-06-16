@@ -9,6 +9,8 @@ rabbitMQ 各种模式特性基本使用
 1. com.hss.simple(Hello World 模式)
 2. com.hss.work(Work queues 模式)
 3. com.hss.ps(Publish/Subscribe 模式)
+4. com.hss.routing(Routing 模式)
+5. com.hss.topic(Topic 模式)
 
 ## 2 boot-rabbitmq
 ### 2.1 简述

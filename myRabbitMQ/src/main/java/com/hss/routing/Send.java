@@ -5,6 +5,9 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -27,16 +30,20 @@ public class Send {
          */
         channel.exchangeDeclare(EXCHANGE_NAME,"direct",true,false,null);//分发
 
-        String routingkey = "email";
+        Map dataMap = new LinkedHashMap<String, String>();
+        dataMap.put("email","邮件：message");
+        dataMap.put("sms","短信：message");
+        dataMap.put("weChat","微信：message");
 
-        for(int i=0; i < 10;i++){
+        Iterator<Map.Entry<String, String>> itr = dataMap.entrySet().iterator();
+        while (itr.hasNext()) {
             //发送消息
-            Thread.sleep(200*i);
+            Thread.sleep(200);
 
-            String msg = "hello ps"+i;
-            channel.basicPublish(EXCHANGE_NAME,routingkey,null,msg.getBytes());
+            Map.Entry<String, String> me = itr.next();
+            channel.basicPublish(EXCHANGE_NAME,me.getKey(),null,me.getValue().getBytes());
 
-            System.out.println("send:"+msg);
+            System.out.println("send:"+me.getValue());
         }
 
         channel.close();

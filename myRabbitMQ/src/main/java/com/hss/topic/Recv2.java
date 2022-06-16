@@ -6,6 +6,9 @@ import com.rabbitmq.client.*;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * 消息消费者2
+ */
 public class Recv2 {
 
     private static final String QUEUE_NAME = "test_queue_topic_2";
@@ -20,6 +23,11 @@ public class Recv2 {
         //声明队列 queueDeclare（名字，是否知持久化道，独占的queue， 不使用时是否自内动删除，其他参数）；
         channel.queueDeclare(QUEUE_NAME,true,false,false,null);
 
+        /*
+        通配符规则：
+        # 匹配一个或多个词 item -> item.insert 或 item.insert.abc
+        * 匹配不多不少恰好1个词 -> 只能匹配 item.insert
+         */
         String routingkey = "goods.#";
         //绑定队列到交换机（转发器）
         channel.queueBind(QUEUE_NAME,EXCHANGE_NAME,routingkey);
