@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -35,7 +36,11 @@ public class ConfirmSend3 {
             //没有问题的handleAck
             @Override
             public void handleAck(long deliveryTag, boolean multiple) throws IOException {
-                //第二个参数 multiple 代表接收的数据是否为批量接收，一般我们用不到。
+                /*
+                第二个参数 multiple 代表接收的数据是否为批量接收
+                单个或者批量确认，貌似是随机的。
+                发送的消息条数越多，批量确认的次数越多
+                 */
                 if(multiple){
                     System.out.println("----------handleAck----------multiple");
                     confirmSet.headSet(deliveryTag+1).clear();
@@ -70,6 +75,7 @@ public class ConfirmSend3 {
         });
 
         for(int i=0;i < 5;i++){
+            TimeUnit.SECONDS.sleep(1);
             String msgString = "hello confirm message["+i+"]";
             long seqNo = channel.getNextPublishSeqNo();
             channel.basicPublish("",QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, msgString.getBytes());
