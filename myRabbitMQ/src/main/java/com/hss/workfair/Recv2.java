@@ -6,6 +6,9 @@ import com.rabbitmq.client.*;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * 消息消费者2
+ */
 public class Recv2 {
 
     private static final String QUEUE_NAME="test_work_queue";

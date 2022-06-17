@@ -25,16 +25,16 @@ public class TxSend {
         boolean durable=true;//消息队列（queue）是否持久化
         channel.queueDeclare(QUEUE_NAME,durable,false,false,null);
 
-        String msgString = "hello tx message";
-
         try{
             channel.txSelect();
             /**  MessageProperties.PERSISTENT_TEXT_PLAIN--消息持久化 */
-            channel.basicPublish("",QUEUE_NAME,MessageProperties.PERSISTENT_TEXT_PLAIN,msgString.getBytes());
-            System.out.println("send:"+msgString);
-//            if(true){
-//                throw new RuntimeException("我要抛异常");
-//            }
+            channel.basicPublish("",QUEUE_NAME,MessageProperties.PERSISTENT_TEXT_PLAIN,"hello tx message1".getBytes());
+            channel.basicPublish("",QUEUE_NAME,MessageProperties.PERSISTENT_TEXT_PLAIN,"hello tx message2".getBytes());
+            channel.basicPublish("",QUEUE_NAME,MessageProperties.PERSISTENT_TEXT_PLAIN,"hello tx message3".getBytes());
+            System.out.println("send message success!");
+            if(true){
+                throw new RuntimeException("我要抛异常");
+            }
             channel.txCommit();
         }catch (Exception E){
             channel.txRollback();

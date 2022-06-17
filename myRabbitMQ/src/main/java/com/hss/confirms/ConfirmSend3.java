@@ -35,6 +35,7 @@ public class ConfirmSend3 {
             //没有问题的handleAck
             @Override
             public void handleAck(long deliveryTag, boolean multiple) throws IOException {
+                //第二个参数 multiple 代表接收的数据是否为批量接收，一般我们用不到。
                 if(multiple){
                     System.out.println("----------handleAck----------multiple");
                     confirmSet.headSet(deliveryTag+1).clear();
