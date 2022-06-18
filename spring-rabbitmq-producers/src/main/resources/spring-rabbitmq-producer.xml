@@ -52,6 +52,8 @@
 
     <!-- 定义队列-->
     <rabbit:queue id="spring_direct_queue" name="spring_direct_queue"  auto-declare="true"/>
+    <rabbit:queue id="spring_direct_queue_1" name="spring_direct_queue_1"  auto-declare="true"/>
+    <rabbit:queue id="spring_direct_queue_2" name="spring_direct_queue_2"  auto-declare="true"/>
 
     <!--
       定义 Routing  路由模式 交互机
@@ -60,6 +62,8 @@
         <rabbit:bindings>
             <!--direct 类型的交换机绑定队列  key ：路由key  queue：队列名称-->
             <rabbit:binding queue="spring_direct_queue" key="info"></rabbit:binding>
+            <rabbit:binding queue="spring_direct_queue_1" key="shell"></rabbit:binding>
+            <rabbit:binding queue="spring_direct_queue_2" key="lua"></rabbit:binding>
         </rabbit:bindings>
 
     </rabbit:direct-exchange>

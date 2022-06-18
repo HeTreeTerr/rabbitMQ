@@ -7,6 +7,6 @@ public class SpringQueueListener implements MessageListener {
     @Override
     public void onMessage(Message message) {
         //打印消息
-        System.out.println(new String(message.getBody()));
+        System.out.println(this.getClass().getName() + "--" + new String(message.getBody()));
     }
 }

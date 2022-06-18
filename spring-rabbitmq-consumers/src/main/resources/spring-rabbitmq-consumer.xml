@@ -18,20 +18,29 @@
                                username="${rabbitmq.username}"
                                password="${rabbitmq.password}"
                                virtual-host="${rabbitmq.virtual-host}"/>
-
+    <!-- 点对点模式监听 -->
     <bean id="springQueueListener" class="com.hss.rabbitmq.listener.SpringQueueListener"/>
+    <!--  发布订阅模式监听 -->
     <bean id="fanoutListener1" class="com.hss.rabbitmq.listener.FanoutListener"/>
-    <!-- <bean id="fanoutListener2" class="com.hss.rabbitmq.listener.FanoutListener2"/>
+    <bean id="fanoutListener2" class="com.hss.rabbitmq.listener.FanoutListener2"/>
+    <!-- 路由模式监听 -->
+    <bean id="directListener" class="com.hss.rabbitmq.listener.DirectListener"/>
+    <bean id="directListener1" class="com.hss.rabbitmq.listener.DirectListener1"/>
+    <bean id="directListener2" class="com.hss.rabbitmq.listener.DirectListener2"/>
+    <!-- 通配符模式监听 -->
     <bean id="topicListenerStar" class="com.hss.rabbitmq.listener.TopicListenerStar"/>
     <bean id="topicListenerWell" class="com.hss.rabbitmq.listener.TopicListenerWell"/>
     <bean id="topicListenerWell2" class="com.hss.rabbitmq.listener.TopicListenerWell2"/>
--->
+
     <rabbit:listener-container connection-factory="connectionFactory" auto-declare="true">
-       <rabbit:listener ref="springQueueListener" queue-names="spring_queue"/>
+        <rabbit:listener ref="springQueueListener" queue-names="spring_queue"/>
         <rabbit:listener ref="fanoutListener1" queue-names="spring_fanout_queue_1"/>
-        <!--<rabbit:listener ref="fanoutListener2" queue-names="spring_fanout_queue_2"/>
+        <rabbit:listener ref="fanoutListener2" queue-names="spring_fanout_queue_2"/>
+        <rabbit:listener ref="directListener" queue-names="spring_direct_queue"/>
+        <rabbit:listener ref="directListener1" queue-names="spring_direct_queue_1"/>
+        <rabbit:listener ref="directListener2" queue-names="spring_direct_queue_2"/>
         <rabbit:listener ref="topicListenerStar" queue-names="spring_topic_queue_star"/>
         <rabbit:listener ref="topicListenerWell" queue-names="spring_topic_queue_well"/>
-        <rabbit:listener ref="topicListenerWell2" queue-names="spring_topic_queue_well2"/>-->
+        <rabbit:listener ref="topicListenerWell2" queue-names="spring_topic_queue_well2"/>
     </rabbit:listener-container>
 </beans>

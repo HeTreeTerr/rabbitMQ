@@ -15,40 +15,47 @@ public class ProducerTest {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-
+    /**
+     * 点对点简单模式
+     */
     @Test
     public void testHelloWorld(){
         //2.发送消息
-
         rabbitTemplate.convertAndSend("spring_queue","hello world spring....");
+        System.out.println("发送成功!");
     }
 
 
     /**
+     * 发布订阅模式
      * 发送fanout消息
      */
     @Test
     public void testFanout(){
         //2.发送消息
-
         rabbitTemplate.convertAndSend("spring_fanout_exchange","","spring fanout....");
-    }
-
-
-    @Test
-    public void testDirect(){
-        //2.发送消息
-
-        rabbitTemplate.convertAndSend("spring_direct_exchange","info","spring Direct....");
+        System.out.println("发送成功!");
     }
 
     /**
+     * 路由模式
+     * 发送direct消息
+     */
+    @Test
+    public void testDirect(){
+        //2.发送消息
+        rabbitTemplate.convertAndSend("spring_direct_exchange","info","spring Direct....");
+        System.out.println("发送成功!");
+    }
+
+    /**
+     * 通配符模式
      * 发送topic消息
      */
     @Test
     public void testTopics(){
         //2.发送消息
-
-        rabbitTemplate.convertAndSend("spring_topic_exchange","baiqi.hehe.haha","spring topic....");
+        rabbitTemplate.convertAndSend("spring_topic_exchange","goods.hehe.haha","spring topic....");
+        System.out.println("发送成功!");
     }
 }
