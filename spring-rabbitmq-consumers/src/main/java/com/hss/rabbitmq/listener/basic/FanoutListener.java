@@ -1,4 +1,4 @@
-package com.hss.rabbitmq.listener;
+package com.hss.rabbitmq.listener.basic;
 
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;
