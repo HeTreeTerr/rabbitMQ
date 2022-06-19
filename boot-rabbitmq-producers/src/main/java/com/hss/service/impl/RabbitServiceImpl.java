@@ -20,4 +20,9 @@ public class RabbitServiceImpl implements RabbitService {
     public void sendFanoutMessage(String message) {
         rabbitTemplate.convertAndSend("com.exchange.fanout","",message);
     }
+
+    @Override
+    public void sendTopicMessage(String message) {
+        rabbitTemplate.convertAndSend("com.exchange.topic","topic.hss",message);
+    }
 }

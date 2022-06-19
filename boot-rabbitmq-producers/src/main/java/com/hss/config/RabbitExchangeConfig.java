@@ -55,9 +55,9 @@ public class RabbitExchangeConfig {
         Queue queue = new Queue("com.queue.notify.hello", true,false,false);
         this.rabbitAdmin.declareQueue(queue);
         //添加绑定关系
-        this.rabbitAdmin.declareBinding(new Binding("com.queue.notify.hello",Binding.DestinationType.QUEUE,"com.exchange.topic","topic",null));
+        this.rabbitAdmin.declareBinding(new Binding("com.queue.notify.hello",Binding.DestinationType.QUEUE,"com.exchange.topic","topic.#",null));
         //解除绑定关系
-        this.rabbitAdmin.removeBinding(new Binding("com.queue.notify.hello",Binding.DestinationType.QUEUE,"com.exchange.topic","topic",null));
+        //this.rabbitAdmin.removeBinding(new Binding("com.queue.notify.hello",Binding.DestinationType.QUEUE,"com.exchange.topic","topic",null));
 
         return queue;
     }
