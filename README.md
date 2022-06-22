@@ -21,7 +21,12 @@ rabbitMQ 与 spring 整合。
 包含 spring-rabbitmq-producers 和 spring-rabbitmq-consumers模块。
 
 ### 2.2 详情
-todo...
+1. 五大模式使用
+2. 消息可靠性投递（确认机制、回退机制）
+3. 保障消息被消费（手动签收机制）
+4. TTL 过期队列
+5. 死信队列（dead-letter-exchange）
+6. 延迟队列（依赖过期队列和死信队列实现）
 
 ## 3 boot-rabbitmq
 ### 3.1 简述
